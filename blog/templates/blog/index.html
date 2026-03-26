@@ -1,0 +1,28 @@
+{% extends "./base.html" %}
+
+{% block content %}
+    <a href="{% url 'create' %}" class="btn btn-accent w-full">Ajouter un blog</a>
+    {% for post in posts %}
+        <div class="mb-4 p-4 bg-base-100 rounded-lg w-full flex justify-between item-center" style="flex-direction: column;">
+            
+            <div class="mb-3">
+                <p class="font-bold text-lg" style="display: block;">
+                {{post.titre}}
+            </p>
+            </div>
+            <div style="display: flex;">
+                <p>
+                {{post.content}}
+                </p>
+            </div>
+            <a href="{% url 'detail' id=post.id %}" class="btn btn-primary mt-3" >Details</a>
+            <div class="mt-5 space-x-3">
+                <a href="{% url 'edit' id=post.id %}" class="btn btn-soft btn-success">modify</a>
+                <a href="{% url 'delete' id=post.id %}" class="btn btn-error">delete</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>no posts</p>
+    {% endfor %}
+
+{% endblock %}

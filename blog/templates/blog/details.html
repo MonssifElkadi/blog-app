@@ -1,0 +1,25 @@
+{% extends "./base.html" %}
+
+{% block content %}
+        <a href="{% url 'index' %}" class="btn btn-info w-full mb-5">Back to post</a>
+        
+        <div class="p-4 bg-base-100 rounded-lg w-full flex justify-between item-center" style="flex-direction: column;">
+            <div class="mb-3">
+                <p class="font-bold text-lg" style="display: block;">
+                {{post.titre}}
+            </p>
+            </div>
+            <div style="display: flex;">
+                <p>
+                {{post.content}}
+                </p>
+                <p style="color: gray;">
+                    {{post.created_at}}
+                </p>
+                <p style="color: gray;">
+                    {{post.modified_at}}
+                </p>
+            </div>
+            
+
+{% endblock %}

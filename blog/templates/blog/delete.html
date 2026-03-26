@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Delete — {{ post.title }}{% endblock %}
+
+{% block content %}
+<div class="p-4 bg-base-100 rounded-lg w-full flex justify-between item-center" style="flex-direction: column;">
+    <h1>Delete Post</h1>
+    <p>Are you sure you want to delete "{{ post.title }}"? This cannot be undone.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button class="" type="submit">Yes, delete it</button>
+    </form>
+
+    <a href="{% url 'index' post.id %}" class="btn btn-error w-full" >Cancel</a>
+
+
+{% endblock %}
