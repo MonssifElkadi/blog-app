@@ -9,10 +9,10 @@
 
     <form method="POST">
         {% csrf_token %}
-        <button class="" type="submit">Yes, delete it</button>
+        <button class="btn btn-primary w full mt-5" type="submit">Yes, delete it</button>
     </form>
 
-    <a href="{% url 'index' post.id %}" class="btn btn-error w-full" >Cancel</a>
-
+    <a href="{% url 'index' %}" class="btn btn-error w-full mt-5">Cancel</a>
+</div>
 
 {% endblock %}

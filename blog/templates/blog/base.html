@@ -1,37 +1,83 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4" ></script> 
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des employée</title>
-    <style>
-        input {
-            display: block;
-            width: 300px;
-            
-        }
-        textarea {
-            display: block;
-            width: 300px;
-        }
-    </style>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion des employée</title>
+  <style>
+    input {
+      display: block;
+      width: 300px;
+
+    }
+
+    textarea {
+      display: block;
+      width: 300px;
+    }
+  </style>
 </head>
+
 <body>
-    
-    <div class="flex justify-center mt-32">
-        <div class="flex flex-col w-3xl bg-base-200 rounded-xl p-6">
-            
-            <div class="w-full h-fit">
-                {% block content %}
-
-
-                {% endblock %}
-            </div>
+  <div class="navbar bg-base-100 shadow-sm">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+          </svg>
         </div>
+      </div>
+      <a class="btn btn-ghost text-xl"><img src="{% static 'imgs/logo.png' %}" alt="Logo"></a>
     </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        <li><a href="{% url 'index' %}">HOME</a></li>
+        <li><a href="{% url 'create' %}">CREATE</a></li>
+      </ul>
+    </div>
+    <div class="navbar-end">
+      <div class="dropdown dropdown-end">
+        {% if request.user.is_authenticated %}
+        <div tabindex="0" role="button" class="btn btn-ghost">
+          <div class="badge badge-outline badge-info">
+            {{request.user.username}}
+          </div>
+        </div>
+
+        <ul tabindex="-1" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+          <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <li><button type="submit">Logout</button></li>
+          </form>
+        </ul>
+        {% else %}
+        <div class="flex-none flex" style="gap: 20px;">
+          <a href="{% url 'register' %}" class="btn btn-info">Register</a>
+          <a href="{% url 'login' %}" class="btn btn-success">Login</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-center mt-32">
+    <div class="flex flex-col w-3xl bg-base-200 rounded-xl p-6">
+
+      <div class="w-full h-fit">
+        {% block content %}
+
+
+        {% endblock %}
+      </div>
+    </div>
+  </div>
 
 </body>
+
 </html>

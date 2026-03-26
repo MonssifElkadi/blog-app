@@ -1,0 +1,17 @@
+{% extends 'blog/base.html' %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+    <h1>Creer votre account dés maintenant</h1>
+
+    <div class="p-4 bg-base-100 rounded-lg w-full flex justify-between item-center" style="flex-direction: column;">
+            <form method="POST" action="{% url 'register' %}">
+                {% csrf_token %}
+
+                {{form.as_p}}
+                <button type="submit" class="btn mt-5 btn-success btn-sm w-full">Submit</button>
+            </form>
+        </div>
+
+{% endblock %}
